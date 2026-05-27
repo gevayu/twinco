@@ -1,0 +1,22 @@
+/**
+ * Twinco brandmark — the standalone "ᴧᴧ" glyph from the wordmark
+ * (the connected Tw ligature). Uses currentColor. Pair it with a
+ * squircle for the app-icon lockup seen in the Brandbook (F04):
+ *   <span className="grid place-items-center rounded-2xl bg-azure p-2">
+ *     <TwincoMark className="text-white w-6" />
+ *   </span>
+ */
+export function TwincoMark({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 224.13 90.0876"
+      fill="none"
+      role="img"
+      aria-label="Twinco mark"
+      className={className}
+    >
+      <path d="M84.6899 90.075C82.3579 90.075 80.0009 89.6474 77.7317 88.7545C69.6952 85.5977 64.4922 77.5988 64.4922 68.38V39.793L20.4234 83.5225H5.15285L0 62.8337L60.0164 5.37029C65.9089 0.591108 73.7573 -0.364728 80.5024 2.88009C87.7616 6.35128 92.438 14.1363 92.438 22.6885V49.5652L129.824 9.00499C135.253 3.11905 143.202 1.06903 150.561 3.67242C158.347 6.41417 163.763 13.8722 164.377 22.6634L166.045 46.8863L202.529 0H217.887L224.13 16.048L175.473 80.9946C170.42 87.7357 162.108 90.6032 154.297 88.2765C145.973 85.8115 140.193 78.2277 139.553 68.9837L137.685 41.8053L99.1079 83.6608C95.2589 87.8363 90.0308 90.0876 84.7024 90.0876" fill="currentColor" />
+    </svg>
+  );
+}
