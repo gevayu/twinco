@@ -10,6 +10,49 @@ import {
   type IconProps,
 } from "@/components/ui/icons";
 
+const MARK_PATH =
+  "M84.6899 90.075C82.3579 90.075 80.0009 89.6474 77.7317 88.7545C69.6952 85.5977 64.4922 77.5988 64.4922 68.38V39.793L20.4234 83.5225H5.15285L0 62.8337L60.0164 5.37029C65.9089 0.591108 73.7573 -0.364728 80.5024 2.88009C87.7616 6.35128 92.438 14.1363 92.438 22.6885V49.5652L129.824 9.00499C135.253 3.11905 143.202 1.06903 150.561 3.67242C158.347 6.41417 163.763 13.8722 164.377 22.6634L166.045 46.8863L202.529 0H217.887L224.13 16.048L175.473 80.9946C170.42 87.7357 162.108 90.6032 154.297 88.2765C145.973 85.8115 140.193 78.2277 139.553 68.9837L137.685 41.8053L99.1079 83.6608C95.2589 87.8363 90.0308 90.0876 84.7024 90.0876";
+
+function MarkPhotoBackground() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 -translate-y-1/2 opacity-[0.18]"
+    >
+      <svg
+        viewBox="0 0 224.13 90.0876"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+        className="block h-auto w-full"
+      >
+        <defs>
+          <clipPath id="methodology-mark-clip">
+            <path d={MARK_PATH} />
+          </clipPath>
+        </defs>
+        <g clipPath="url(#methodology-mark-clip)">
+          <image
+            href="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2200&q=80"
+            x="0"
+            y="0"
+            width="224.13"
+            height="90.0876"
+            preserveAspectRatio="xMidYMid slice"
+          />
+          <rect
+            x="0"
+            y="0"
+            width="224.13"
+            height="90.0876"
+            fill="#021B79"
+            opacity="0.42"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 const steps: {
   n: string;
   title: string;
@@ -44,8 +87,10 @@ const steps: {
 
 export function Methodology() {
   return (
-    <Section id="methodology" className="bg-sky">
-      <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
+    <Section id="methodology" className="relative overflow-hidden bg-sky">
+      <MarkPhotoBackground />
+
+      <div className="relative z-10 grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
         {/* sticky heading */}
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow>Our Methodology</Eyebrow>
