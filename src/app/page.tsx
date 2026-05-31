@@ -1,4 +1,4 @@
-import { Hero } from "@/components/home/Hero";
+import { Prelude } from "@/components/home/Prelude";
 import { Opening } from "@/components/home/Opening";
 import { Methodology } from "@/components/home/Methodology";
 import { Solutions } from "@/components/home/Solutions";
@@ -11,7 +11,7 @@ import { FinalCta } from "@/components/home/FinalCta";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <Prelude />
       <Opening />
       <Methodology />
       <Solutions />

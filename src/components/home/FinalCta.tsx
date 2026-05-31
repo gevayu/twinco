@@ -1,95 +1,169 @@
 "use client";
 
-import Image from "next/image";
 import { useState, type FormEvent } from "react";
-import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Section";
-import { IconCheck } from "@/components/ui/icons";
+import { Reveal } from "@/components/ui/Reveal";
+import { BrandVideo } from "@/components/ui/BrandVideo";
 
-const fields = [
-  { name: "fullName", label: "Full Name", type: "text", autoComplete: "name" },
-  { name: "company", label: "Company", type: "text", autoComplete: "organization" },
-  { name: "email", label: "Email", type: "email", autoComplete: "email" },
-] as const;
+type FieldDef = {
+  name: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  autoComplete: string;
+  half?: boolean;
+};
+
+const fieldDefs: FieldDef[] = [
+  { name: "name", label: "Full Name", type: "text", placeholder: "Jane Doe", autoComplete: "name", half: true },
+  { name: "company", label: "Company", type: "text", placeholder: "Acme Corp", autoComplete: "organization", half: true },
+  { name: "email", label: "Email", type: "email", placeholder: "jane@acmecorp.com", autoComplete: "email", half: true },
+  { name: "phone", label: "Phone", type: "tel", placeholder: "+1 555 0100", autoComplete: "tel", half: true },
+];
+
+type Values = Record<string, string>;
+
+function validate(values: Values): Record<string, string> {
+  const errors: Record<string, string> = {};
+  if (!values.name?.trim()) errors.name = "Please enter your name.";
+  if (!values.company?.trim()) errors.company = "Please enter your company.";
+  if (!values.email?.trim()) errors.email = "Please enter your email.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))
+    errors.email = "That email doesn't look right.";
+  if (!values.phone?.trim()) errors.phone = "Please enter a phone number.";
+  else if (values.phone.replace(/[^\d]/g, "").length < 7)
+    errors.phone = "That phone number looks too short.";
+  return errors;
+}
+
+function Field({
+  def,
+  value,
+  error,
+  onChange,
+}: {
+  def: FieldDef;
+  value: string;
+  error?: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div className={def.half ? "" : "sm:col-span-2"}>
+      <label htmlFor={def.name} className="mb-1.5 ml-1 block text-sm font-bold text-[#021879]">
+        {def.label}
+      </label>
+      <input
+        id={def.name}
+        name={def.name}
+        type={def.type}
+        required
+        autoComplete={def.autoComplete}
+        value={value}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${def.name}-err` : undefined}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={def.placeholder}
+        className={`w-full rounded-xl border bg-[#F4F9FF] px-5 py-3 font-medium text-gray-900 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#147BFE] ${
+          error ? "border-red-400" : "border-[#E7F3FF]"
+        }`}
+      />
+      {error ? (
+        <p id={`${def.name}-err`} className="mt-1 ml-1 text-sm font-medium text-red-600">
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function SuccessState() {
+  return (
+    <div role="status" className="flex flex-col items-start justify-center">
+      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#147BFE]/10">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#147BFE" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
+          <path d="m5 12 4.5 4.5L19 7" />
+        </svg>
+      </div>
+      <h2 className="mb-3 text-3xl font-bold tracking-tight text-[#021879] md:text-4xl">
+        Request received
+      </h2>
+      <p className="text-lg font-medium text-gray-600">
+        Thanks. We&apos;ll reach out within one business day to set up your
+        Solution Mapping Session.
+      </p>
+    </div>
+  );
+}
+
+function CtaForm() {
+  const [values, setValues] = useState<Values>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const found = validate(values);
+    setErrors(found);
+    if (Object.keys(found).length === 0) setSent(true);
+  };
+
+  return (
+    <div className="relative z-10 flex w-full flex-col justify-center bg-white p-8 md:w-1/2 md:p-12">
+      {sent ? (
+        <SuccessState />
+      ) : (
+        <>
+          <h2 className="mb-3 text-3xl font-bold tracking-tight text-[#021879] md:text-4xl">
+            Engineer Your Success
+          </h2>
+          <p className="mb-7 text-lg font-medium text-gray-600">
+            Let&apos;s set the target for your first quick win.
+          </p>
+          <form noValidate onSubmit={onSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {fieldDefs.map((def) => (
+              <Field
+                key={def.name}
+                def={def}
+                value={values[def.name] ?? ""}
+                error={errors[def.name]}
+                onChange={(v) =>
+                  setValues((prev) => ({ ...prev, [def.name]: v }))
+                }
+              />
+            ))}
+            <button
+              type="submit"
+              className="mt-2 rounded-xl bg-[#0f63d6] py-4 text-lg font-bold text-white shadow-md transition-colors duration-300 hover:bg-[#021879] hover:shadow-xl sm:col-span-2"
+            >
+              Request an Assessment
+            </button>
+          </form>
+        </>
+      )}
+    </div>
+  );
+}
+
+function CtaAside() {
+  return (
+    <div className="group relative hidden min-h-[400px] w-full md:block md:w-1/2">
+      <BrandVideo
+        src="/0_Woman_Business_Woman_1280x720.mp4"
+        className="absolute inset-0 h-full w-full"
+      />
+    </div>
+  );
+}
 
 export function FinalCta() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // TODO: wire to a real endpoint / CRM (Next.js route handler or form
-    // provider). For now we confirm capture on the client only.
-    setSubmitted(true);
-  }
-
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden bg-night-deep py-24 sm:py-32"
+      className="relative flex min-h-[480px] items-center px-6 py-20 md:px-12 mesh-bg-dark"
     >
-      <div className="pointer-events-none absolute -left-[8%] bottom-0 w-[60%] opacity-50">
-        <Image
-          src="/brand/wave-dark.png"
-          alt=""
-          width={2000}
-          height={1200}
-          className="wave-on-dark h-auto w-full"
-        />
-      </div>
-
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1fr_0.85fr] lg:px-10">
-        <div>
-          <Eyebrow tone="light">Get Started</Eyebrow>
-          <h2 className="font-display mt-5 text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-[3.4rem]">
-            Ready to engineer your AI success?
-          </h2>
-          <p className="mt-6 max-w-md text-xl leading-relaxed text-white/75">
-            Let’s set the target for your first quick win.
-          </p>
-        </div>
-
-        <div className="rounded-[2rem] bg-white p-7 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.6)] sm:p-9">
-          {submitted ? (
-            <div className="flex flex-col items-center gap-4 py-12 text-center">
-              <span className="grid h-16 w-16 place-items-center rounded-full bg-azure/10 text-azure">
-                <IconCheck className="w-9" />
-              </span>
-              <h3 className="font-display text-2xl font-bold text-navy">
-                Thank you
-              </h3>
-              <p className="max-w-xs leading-relaxed text-muted">
-                Your assessment request is in. We’ll be in touch shortly to set
-                your first target.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-              {fields.map((f) => (
-                <div key={f.name} className="flex flex-col gap-2">
-                  <label htmlFor={f.name} className="label-mono text-navy">
-                    {f.label}
-                  </label>
-                  <input
-                    id={f.name}
-                    name={f.name}
-                    type={f.type}
-                    autoComplete={f.autoComplete}
-                    required
-                    placeholder={f.label}
-                    className="rounded-xl bg-sky px-4 py-3.5 text-[15px] text-ink outline-none ring-1 ring-inset ring-navy/10 transition-shadow placeholder:text-muted/50 focus:ring-2 focus:ring-azure"
-                  />
-                </div>
-              ))}
-              <Button type="submit" variant="primary" size="lg" className="mt-2 w-full">
-                Request an Assessment
-              </Button>
-              <p className="text-center text-sm text-muted">
-                We’ll only use your details to prepare your assessment.
-              </p>
-            </form>
-          )}
-        </div>
-      </div>
+      <Reveal className="mx-auto flex w-full max-w-7xl flex-col items-stretch overflow-hidden rounded-[3rem] border border-[#E7F3FF] bg-white shadow-2xl md:flex-row">
+        <CtaForm />
+        <CtaAside />
+      </Reveal>
     </section>
   );
 }

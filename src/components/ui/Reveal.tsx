@@ -6,6 +6,7 @@ import {
   useState,
   type CSSProperties,
   type ElementType,
+  type HTMLAttributes,
   type ReactNode,
 } from "react";
 
@@ -15,7 +16,7 @@ type RevealProps = {
   /** Stagger delay in seconds. */
   delay?: number;
   className?: string;
-};
+} & Omit<HTMLAttributes<HTMLElement>, "style" | "className" | "children">;
 
 /**
  * Scroll-triggered entrance animation (fade + blur + translate-y).
@@ -32,6 +33,7 @@ export function Reveal({
   as,
   delay = 0,
   className = "",
+  ...rest
 }: RevealProps) {
   const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLElement>(null);
@@ -69,6 +71,7 @@ export function Reveal({
       ref={ref}
       className={`reveal ${shown ? "is-visible" : ""} ${className}`.trim()}
       style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
+      {...rest}
     >
       {children}
     </Tag>

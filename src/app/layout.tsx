@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Afacad, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { SiteNav } from "@/components/layout/SiteNav";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { CursorGlow } from "@/components/ui/CursorGlow";
 
 const afacad = Afacad({
   variable: "--font-afacad",
@@ -16,6 +17,11 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Twinco — Architects of Enterprise AI Adoption",
@@ -50,10 +56,17 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-ink">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-full bg-white text-ink">
+        <a
+          href="#top"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[#021879] focus:px-5 focus:py-3 focus:font-bold focus:text-white focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        <CursorGlow />
+        <SiteNav />
+        <main id="top">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

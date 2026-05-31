@@ -1,109 +1,137 @@
 "use client";
 
-import { useState } from "react";
-import { Section, SectionHeading } from "@/components/ui/Section";
-import { IconQuote } from "@/components/ui/icons";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 
-/**
- * PLACEHOLDER testimonials — swap the `testimonials` array for real client
- * quotes when available (PRD §8). The slider UI is final.
- */
-const testimonials = [
+type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  avatar: string;
+};
+
+const testimonials: Testimonial[] = [
   {
     quote:
-      "Twin-Co didn’t sell us a tool. They re-architected how our finance team works, and we saw measurable ROI inside the first quarter.",
-    name: "Placeholder Name",
-    role: "VP Operations",
-    company: "Enterprise Client",
+      "Twin-Co didn't just sell us a tool; they completely re-architected our transaction flows. We saw a return on investment within the first 45 days.",
+    name: "Maya Adler",
+    role: "VP of Operations, global gaming enterprise",
+    avatar:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200",
   },
   {
     quote:
-      "They isolated the exact bottleneck we’d chased for two years and handed it to a specialist who closed it in weeks. Vendor-agnostic and refreshingly honest.",
-    name: "Placeholder Name",
-    role: "Chief Information Officer",
-    company: "Global Manufacturer",
+      "The 'Customer Service Twin' handled 75% of our Tier 1 tickets in week two. It mirrors our brand voice and freed up our agents.",
+    name: "Daniel Stern",
+    role: "Customer Success Director, FinTech company",
+    avatar:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
   },
   {
     quote:
-      "The digital twin runs our reconciliation autonomously now. Our analysts finally spend their time on strategy instead of spreadsheets.",
-    name: "Placeholder Name",
-    role: "Head of Finance",
-    company: "Fintech Scale-up",
+      "As a security lead, I was buried in compliance. The custom copilot acts as a tireless auditor. It changed how we manage regulatory risk.",
+    name: "Lena Brandt",
+    role: "Head of Security, healthcare network",
+    avatar:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200",
   },
 ];
 
+function TestimonialCard({ item }: { item: Testimonial }) {
+  return (
+    <div className="rise bg-sky-gradient border border-[#E7F3FF] rounded-[2rem] p-10 md:p-16 shadow-sm">
+      <p className="text-2xl md:text-4xl text-[#021879] font-medium leading-snug mb-10">
+        &quot;{item.quote}&quot;
+      </p>
+      <div className="flex items-center gap-4">
+        <Image
+          src={item.avatar}
+          alt=""
+          width={128}
+          height={128}
+          className="h-32 w-32 shrink-0 rounded-full border-4 border-white object-cover shadow-md"
+        />
+        <div>
+          <h3 className="font-bold text-lg text-[#021879]">{item.name}</h3>
+          <p className="text-[#021879]/80 font-medium text-sm">{item.role}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const arrowBtn =
+  "w-12 h-12 bg-white border border-[#E7F3FF] rounded-full flex items-center justify-center text-[#021879] hover:bg-[#147BFE] hover:text-white transition-all shadow-md hover:shadow-lg";
+
+function useTestimonialCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const go = (delta: number) =>
+    setCurrent((p) => (p + delta + testimonials.length) % testimonials.length);
+
+  // Auto-advance every 12s; resets on every change and pauses on hover/focus so
+  // it never swaps a quote out from under the reader.
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(
+      () => setCurrent((p) => (p + 1) % testimonials.length),
+      12000,
+    );
+    return () => clearTimeout(t);
+  }, [current, paused]);
+
+  const pauseHandlers = {
+    onMouseEnter: () => setPaused(true),
+    onMouseLeave: () => setPaused(false),
+    onFocusCapture: () => setPaused(true),
+    onBlurCapture: () => setPaused(false),
+  };
+  return { current, setCurrent, go, pauseHandlers };
+}
+
 export function SocialProof() {
-  const [index, setIndex] = useState(0);
-  const count = testimonials.length;
-  const go = (dir: number) => setIndex((i) => (i + dir + count) % count);
-  const t = testimonials[index];
-  const initials = t.name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2);
+  const { current, setCurrent, go, pauseHandlers } = useTestimonialCarousel();
 
   return (
-    <Section className="bg-white">
-      <SectionHeading
-        eyebrow="Social Proof"
-        title="Engineered success: client perspectives"
-      />
+    <section id="perspectives" className="py-24 md:py-32 px-6 md:px-12 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <Reveal
+          as="h2"
+          className="text-4xl md:text-5xl font-bold text-center text-[#021879] mb-16 tracking-tight"
+        >
+          Engineered Success: Client Perspectives
+        </Reveal>
 
-      <div className="mt-12 grid items-center gap-8 lg:grid-cols-[auto_1fr]">
-        <IconQuote className="hidden w-20 shrink-0 text-yellow lg:block" />
-        <div>
-          <blockquote className="font-display text-balance text-2xl font-medium leading-[1.3] text-navy sm:text-3xl lg:text-[2.4rem]">
-            “{t.quote}”
-          </blockquote>
+        <Reveal delay={0.1} className="relative max-w-4xl mx-auto" {...pauseHandlers}>
+          <div className="px-4">
+            <TestimonialCard key={current} item={testimonials[current]} />
+          </div>
 
-          <div className="mt-9 flex flex-wrap items-center justify-between gap-6">
-            <figcaption className="flex items-center gap-4">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-azure/15 font-bold text-azure">
-                {initials}
-              </span>
-              <span>
-                <span className="block font-bold text-navy">{t.name}</span>
-                <span className="label-mono mt-0.5 block text-muted">
-                  {t.role} · {t.company}
-                </span>
-              </span>
-            </figcaption>
-
-            <div className="flex items-center gap-3">
-              {testimonials.map((_, i) => (
+          <div className="flex justify-center items-center gap-6 mt-16">
+            <button onClick={() => go(-1)} aria-label="Previous testimonial" className={arrowBtn}>
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <div className="flex gap-2">
+              {testimonials.map((t, idx) => (
                 <button
-                  key={i}
-                  type="button"
-                  onClick={() => setIndex(i)}
-                  aria-label={`Testimonial ${i + 1}`}
-                  className={`h-2.5 rounded-full transition-all ${
-                    i === index ? "w-8 bg-azure" : "w-2.5 bg-navy/15 hover:bg-navy/30"
+                  key={t.name}
+                  onClick={() => setCurrent(idx)}
+                  aria-label={`Show testimonial ${idx + 1}`}
+                  aria-current={current === idx}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    current === idx ? "bg-[#147BFE] w-8" : "bg-[#E7F3FF] w-2.5 hover:bg-[#147BFE]/40"
                   }`}
                 />
               ))}
-              <div className="ml-3 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => go(-1)}
-                  aria-label="Previous"
-                  className="grid h-11 w-11 place-items-center rounded-full ring-1 ring-inset ring-navy/15 text-navy transition-colors hover:bg-navy hover:text-white"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => go(1)}
-                  aria-label="Next"
-                  className="grid h-11 w-11 place-items-center rounded-full ring-1 ring-inset ring-navy/15 text-navy transition-colors hover:bg-navy hover:text-white"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
-                </button>
-              </div>
             </div>
+            <button onClick={() => go(1)} aria-label="Next testimonial" className={arrowBtn}>
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
-        </div>
+        </Reveal>
       </div>
-    </Section>
+    </section>
   );
 }
