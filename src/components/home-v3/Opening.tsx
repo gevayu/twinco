@@ -25,8 +25,14 @@ function OpeningVisual() {
 
 export function Opening() {
   return (
-    <section id="opening" className="py-20 md:py-28 bg-white flex justify-center">
-      <div className="relative w-[90%] max-w-[1600px] mx-auto rounded-[2rem] md:rounded-[3rem] bg-[#F4F9FF] shadow-2xl overflow-hidden ring-1 ring-[#147BFE]/15">
+    <section
+      id="opening"
+      className="sticky top-0 flex min-h-screen items-center justify-center py-16"
+    >
+      <div
+        data-stack-card
+        className="relative w-[96%] max-w-[1760px] mx-auto lg:h-[80vh] flex flex-col justify-center rounded-[2rem] md:rounded-[3rem] bg-[#F4F9FF] shadow-2xl overflow-hidden ring-1 ring-[#147BFE]/15 origin-top will-change-transform transition-[transform,filter,box-shadow] duration-500 ease-out"
+      >
         {/* Signature growth-wave, watermarked across the vertical center */}
         <Image
           src="/brand/wave-hero.png"
@@ -53,7 +59,7 @@ export function Opening() {
               delay={0.1}
               className="text-2xl md:text-3xl text-[#021879] font-medium leading-relaxed mb-8"
             >
-              Because… most companies treat AI as a software installation.
+              Because most companies treat AI as a software installation.
               <strong className="block mt-4 text-[#147BFE] text-3xl md:text-4xl">
                 We architect an organizational evolution.
               </strong>

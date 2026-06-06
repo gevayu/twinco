@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Afacad, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteNav } from "@/components/layout/SiteNav";
+import { SiteNavSwitch } from "@/components/layout/SiteNavSwitch";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CursorGlow } from "@/components/ui/CursorGlow";
 
@@ -64,7 +64,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <CursorGlow />
-        <SiteNav />
+        <SiteNavSwitch />
         <main id="top">{children}</main>
         <SiteFooter />
       </body>

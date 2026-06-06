@@ -25,8 +25,14 @@ function OpeningVisual() {
 
 export function Opening() {
   return (
-    <section id="opening" className="py-20 md:py-28 bg-white flex justify-center">
-      <div className="relative w-[90%] max-w-[1600px] mx-auto rounded-[2rem] md:rounded-[3rem] bg-[#F4F9FF] shadow-2xl overflow-hidden ring-1 ring-[#147BFE]/15">
+    <section
+      id="opening"
+      className="py-20 md:py-28 flex justify-center"
+      style={{
+        background: "linear-gradient(180deg, #96C4FF 0%, #F4F9FF 100%)",
+      }}
+    >
+      <div className="relative w-[96%] max-w-[1760px] mx-auto lg:h-[80vh] flex flex-col justify-center rounded-[2rem] md:rounded-[3rem] bg-[#F4F9FF] shadow-2xl overflow-hidden ring-1 ring-[#147BFE]/15">
         {/* Signature growth-wave, watermarked across the vertical center */}
         <Image
           src="/brand/wave-hero.png"
