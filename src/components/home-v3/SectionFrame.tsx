@@ -31,7 +31,7 @@ export function SectionFrame({
       id={id}
       className={`sticky top-0 overflow-hidden ${dwell ? "min-h-[150vh]" : "min-h-screen"}`}
     >
-      <div className="flex h-screen items-center justify-center py-16">
+      <div className="flex h-screen items-center justify-center pt-[76px] pb-4">
         <div
           data-stack-card
           className={`relative w-[96%] max-w-[1760px] mx-auto lg:h-[85vh] flex flex-col justify-center overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl ring-1 ring-[#147BFE]/15 origin-top will-change-transform transition-[transform,filter,box-shadow] duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] ${cardClassName}`}
