@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { TwincoLogo } from "@/components/brand/TwincoLogo";
 
+// Order mirrors the v3 page section order:
+// Methodology -> Edge -> Solutions -> Inspiration -> Case Studies -> Perspectives
 const navLinks = [
   { label: "Methodology", href: "#methodology" },
   { label: "The Edge", href: "#edge" },
+  { label: "Solutions", href: "#solutions" },
   { label: "Use Cases", href: "#inspiration" },
   { label: "Case Studies", href: "#case-studies" },
   { label: "Client Perspectives", href: "#perspectives" },

@@ -158,7 +158,7 @@ export function FinalCta() {
   return (
     <section
       id="contact"
-      className="relative flex min-h-screen items-center justify-center px-6 py-20 md:px-12 mesh-bg-dark"
+      className="sticky top-0 flex min-h-screen items-center justify-center px-6 py-12 md:px-12 mesh-bg-dark"
     >
       <Reveal className="mx-auto flex w-full max-w-7xl flex-col items-stretch overflow-hidden rounded-[3rem] border border-[#E7F3FF] bg-white shadow-2xl md:flex-row">
         <CtaForm />

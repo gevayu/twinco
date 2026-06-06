@@ -9,10 +9,12 @@ import { SocialProof } from "@/components/home-v3/SocialProof";
 import { FinalCta } from "@/components/home-v3/FinalCta";
 import { MouseBulb } from "@/components/home-v3/MouseBulb";
 import { CardStack } from "@/components/home-v3/CardStack";
+import { SmoothScroll } from "@/components/home-v3/SmoothScroll";
 
 export default function HomeV3() {
   return (
     <>
+      <SmoothScroll />
       <MouseBulb />
       <Prelude />
       <CardStack>
@@ -23,8 +25,8 @@ export default function HomeV3() {
         <Inspiration />
         <CaseStudy />
         <SocialProof />
+        <FinalCta />
       </CardStack>
-      <FinalCta />
     </>
   );
 }

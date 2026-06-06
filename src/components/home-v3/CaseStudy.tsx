@@ -7,7 +7,7 @@ import { SectionFrame } from "@/components/home-v3/SectionFrame";
 function CaseStudyNarrative() {
   return (
     <Reveal>
-      <h2 className="text-4xl md:text-6xl font-bold text-[#021879] mb-8 tracking-tight">
+      <h2 className="text-4xl md:text-6xl font-bold text-[#021879] mb-4 tracking-tight">
         Architecture in Action:
         <br />
         Case Studies
@@ -20,7 +20,7 @@ function CaseStudyNarrative() {
           delayed bank updates.
         </p>
 
-        <div className="bg-white p-8 pt-10 rounded-2xl shadow-sm my-10 relative overflow-hidden">
+        <div className="bg-white p-8 pt-10 rounded-2xl shadow-sm my-6 relative overflow-hidden">
           <span
             aria-hidden
             className="absolute top-1 left-5 text-7xl leading-none font-bold text-[#147BFE]/15 select-none"
@@ -40,7 +40,7 @@ function CaseStudyNarrative() {
         </p>
       </div>
 
-      <button className="group mt-12 inline-flex items-center gap-3 px-8 py-4 border-2 border-[#021879] text-[#021879] rounded-full text-lg font-bold hover:bg-[#021879] hover:text-white transition-all duration-300">
+      <button className="group mt-6 inline-flex items-center gap-3 px-8 py-4 border-2 border-[#021879] text-[#021879] rounded-full text-lg font-bold hover:bg-[#021879] hover:text-white transition-all duration-300">
         Explore Case Studies &amp; Insights
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </button>
@@ -52,7 +52,7 @@ function CaseStudyVisual() {
   return (
     <Reveal
       delay={0.2}
-      className="relative h-[500px] lg:h-[700px] w-full group rounded-[3rem] overflow-hidden shadow-2xl"
+      className="relative h-[440px] lg:h-[620px] w-full group rounded-[3rem] overflow-hidden shadow-2xl"
     >
       <BrandVideo
         src="/1114854_Woman_Job_1280x720.mp4"

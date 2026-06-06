@@ -27,12 +27,13 @@ export function Opening() {
   return (
     <section
       id="opening"
-      className="sticky top-0 flex min-h-screen items-center justify-center py-16"
+      className="sticky top-0 min-h-[150vh] overflow-hidden"
     >
-      <div
-        data-stack-card
-        className="relative w-[96%] max-w-[1760px] mx-auto lg:h-[80vh] flex flex-col justify-center rounded-[2rem] md:rounded-[3rem] bg-[#F4F9FF] shadow-2xl overflow-hidden ring-1 ring-[#147BFE]/15 origin-top will-change-transform transition-[transform,filter,box-shadow] duration-500 ease-out"
-      >
+      <div className="flex h-screen items-center justify-center py-16">
+        <div
+          data-stack-card
+          className="relative w-[96%] max-w-[1760px] mx-auto lg:h-[85vh] flex flex-col justify-center rounded-[2rem] md:rounded-[3rem] bg-[#F4F9FF] shadow-2xl overflow-hidden ring-1 ring-[#147BFE]/15 origin-top will-change-transform transition-[transform,filter,box-shadow] duration-700 ease-[cubic-bezier(0.83,0,0.17,1)]"
+        >
         {/* Signature growth-wave, watermarked across the vertical center */}
         <Image
           src="/brand/wave-hero.png"
@@ -81,6 +82,7 @@ export function Opening() {
           </div>
 
           <OpeningVisual />
+        </div>
         </div>
       </div>
     </section>

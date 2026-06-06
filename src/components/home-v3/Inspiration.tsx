@@ -190,7 +190,7 @@ function ScenarioPanel({ s }: { s: Scenario }) {
       aria-labelledby={`tab-${s.id}`}
       className="rise grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.85fr)_1fr]"
     >
-      <div className="group relative h-60 overflow-hidden rounded-[2rem] sm:h-72 lg:h-auto lg:min-h-[380px]">
+      <div className="group relative h-60 overflow-hidden rounded-[2rem] sm:h-72 lg:h-auto lg:min-h-[330px]">
         <BrandVideo src={s.video} className="h-full w-full" />
       </div>
       <div className="relative flex flex-col">
@@ -245,7 +245,7 @@ export function Inspiration() {
   return (
     <SectionFrame
       id="inspiration"
-      contentClassName="px-6 py-8 md:px-12 lg:px-16"
+      contentClassName="px-6 py-4 md:px-12 lg:px-16"
       outerStyle={{
         background: "linear-gradient(180deg, #FFF7E1 0%, #F4F9FF 100%)",
       }}

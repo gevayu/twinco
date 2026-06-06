@@ -98,6 +98,7 @@ export function SocialProof() {
   return (
     <SectionFrame
       id="perspectives"
+      dwell={false}
       outerStyle={{
         background: "linear-gradient(0deg, #FFF7E1 0%, #F4F9FF 100%)",
       }}
