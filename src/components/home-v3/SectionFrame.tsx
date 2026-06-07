@@ -29,7 +29,7 @@ export function SectionFrame({
   return (
     <section
       id={id}
-      className={`sticky top-0 overflow-hidden ${dwell ? "min-h-[150vh]" : "min-h-screen"}`}
+      className={`relative overflow-hidden min-h-screen md:sticky md:top-0 ${dwell ? "md:min-h-[150vh]" : ""}`}
     >
       <div className="flex h-screen items-center justify-center pt-[76px] pb-4">
         <div

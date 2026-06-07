@@ -28,8 +28,25 @@ export function CardStack({
     const sections = cards.map((c) => c.closest("section"));
     let raf = 0;
 
+    // The deck-stack effect is desktop-only. On mobile the sections flow one
+    // after another in normal scroll, so we leave every card untouched.
+    const desktop = window.matchMedia("(min-width: 768px)");
+
+    const clearCards = () => {
+      for (const card of cards) {
+        card.style.zIndex = "";
+        card.style.transform = "";
+        card.style.filter = "";
+        card.style.boxShadow = "";
+      }
+    };
+
     const update = () => {
       raf = 0;
+      if (!desktop.matches) {
+        clearCards();
+        return;
+      }
       const tops = sections.map((s) =>
         s ? s.getBoundingClientRect().top : Infinity,
       );
@@ -66,20 +83,30 @@ export function CardStack({
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    desktop.addEventListener("change", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      desktop.removeEventListener("change", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
     <div ref={ref} className="relative">
-      {/* Constant backdrop — sticks for the whole stack; the negative margin
-          keeps it out of the document flow so it adds no extra height. */}
+      {/* Desktop: a constant backdrop that sticks for the whole stack; the
+          negative margin keeps it out of flow so it adds no extra height. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none sticky top-0 -z-10 h-screen -mb-[100vh]"
+        className="pointer-events-none hidden md:block sticky top-0 -z-10 h-screen -mb-[100vh]"
+        style={{ background: backdrop }}
+      />
+      {/* Mobile: there is no stack, so the backdrop simply fills the whole
+          region and scrolls with the content (not fixed) — keeps the area
+          around/between cards from showing through as transparent. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none md:hidden absolute inset-0 -z-10"
         style={{ background: backdrop }}
       />
       {children}
