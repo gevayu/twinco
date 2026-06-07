@@ -98,12 +98,35 @@ function CtaForm() {
   const [values, setValues] = useState<Values>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const found = validate(values);
     setErrors(found);
-    if (Object.keys(found).length === 0) setSent(true);
+    if (Object.keys(found).length > 0) return;
+
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? "Something went wrong.");
+      }
+      setSent(true);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Something went wrong.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -132,10 +155,16 @@ function CtaForm() {
             ))}
             <button
               type="submit"
-              className="mt-2 rounded-xl bg-[#0f63d6] py-4 text-lg font-bold text-white shadow-md transition-colors duration-300 hover:bg-[#021879] hover:shadow-xl sm:col-span-2"
+              disabled={submitting}
+              className="mt-2 rounded-xl bg-[#0f63d6] py-4 text-lg font-bold text-white shadow-md transition-colors duration-300 hover:bg-[#021879] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70 sm:col-span-2"
             >
-              Request an Assessment
+              {submitting ? "Sending…" : "Request an Assessment"}
             </button>
+            {submitError ? (
+              <p role="alert" className="ml-1 text-sm font-medium text-red-600 sm:col-span-2">
+                {submitError}
+              </p>
+            ) : null}
           </form>
         </>
       )}

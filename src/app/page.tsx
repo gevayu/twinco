@@ -1,25 +1,32 @@
-import { Prelude } from "@/components/home/Prelude";
-import { Opening } from "@/components/home/Opening";
-import { Methodology } from "@/components/home/Methodology";
-import { Solutions } from "@/components/home/Solutions";
-import { Edge } from "@/components/home/Edge";
-import { Inspiration } from "@/components/home/Inspiration";
-import { CaseStudy } from "@/components/home/CaseStudy";
-import { SocialProof } from "@/components/home/SocialProof";
-import { FinalCta } from "@/components/home/FinalCta";
+import { Prelude } from "@/components/home-v4/Prelude";
+import { Opening } from "@/components/home-v4/Opening";
+import { Methodology } from "@/components/home-v4/Methodology";
+import { Solutions } from "@/components/home-v4/Solutions";
+import { Edge } from "@/components/home-v4/Edge";
+import { Inspiration } from "@/components/home-v4/Inspiration";
+import { CaseStudy } from "@/components/home-v4/CaseStudy";
+import { SocialProof } from "@/components/home-v4/SocialProof";
+import { FinalCta } from "@/components/home-v4/FinalCta";
+import { MouseBulb } from "@/components/home-v4/MouseBulb";
+import { CardStack } from "@/components/home-v4/CardStack";
+import { SmoothScroll } from "@/components/home-v4/SmoothScroll";
 
 export default function Home() {
   return (
     <>
+      <SmoothScroll />
+      <MouseBulb />
       <Prelude />
-      <Opening />
-      <Methodology />
-      <Solutions />
-      <Edge />
-      <Inspiration />
-      <CaseStudy />
-      <SocialProof />
-      <FinalCta />
+      <CardStack>
+        <Opening />
+        <Methodology />
+        <Edge />
+        <Solutions />
+        <Inspiration />
+        <CaseStudy />
+        <SocialProof />
+        <FinalCta />
+      </CardStack>
     </>
   );
 }

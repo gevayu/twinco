@@ -14,12 +14,12 @@ function PreludeTop() {
         </span>
       </div>
       <h1
-        className="rise text-3xl font-normal leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl"
+        className="rise text-[2.6rem] font-normal leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl"
         style={{ "--d": "0.1s" } as CSSProperties}
       >
         Where 95% of businesses fail,
         <br />
-        <span className="font-bold tracking-normal text-[#FFDE8A] text-[3.6rem] md:text-[5.4rem] lg:text-[7.2rem]">
+        <span className="font-bold tracking-normal text-[#FFDE8A] text-[4rem] md:text-[5.4rem] lg:text-[7.2rem]">
           WE SUCCEED.
         </span>
       </h1>
@@ -29,7 +29,7 @@ function PreludeTop() {
 
 function PreludeBottom() {
   return (
-    <div className="max-w-2xl self-end translate-x-[15%] text-left">
+    <div className="max-w-2xl self-start translate-x-0 text-left md:self-end md:translate-x-[15%]">
       <div className="relative mb-10 max-w-lg">
         <div
           aria-hidden
@@ -48,7 +48,7 @@ function PreludeBottom() {
         className="rise group relative inline-flex items-center justify-center gap-3 rounded-full border border-[#021879]/15 bg-[#FFDE8A] px-8 py-5 text-lg font-bold text-[#021879] transition-all duration-300 hover:scale-105"
         style={{ "--d": "0.3s" } as CSSProperties}
       >
-        Book a Solution Mapping Session
+        Book a session
         <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
       </a>
     </div>

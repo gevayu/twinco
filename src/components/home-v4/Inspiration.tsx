@@ -245,7 +245,7 @@ export function Inspiration() {
   return (
     <SectionFrame
       id="inspiration"
-      contentClassName="px-6 py-4 md:px-12 lg:px-16"
+      contentClassName="px-6 pt-4 pb-20 md:px-12 md:pb-24 lg:px-16"
       outerStyle={{
         background: "linear-gradient(180deg, #FFF7E1 0%, #F4F9FF 100%)",
       }}

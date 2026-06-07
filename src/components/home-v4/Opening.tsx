@@ -27,7 +27,7 @@ export function Opening() {
   return (
     <section
       id="opening"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-[76px] bg-[#F4F9FF]"
+      className="relative flex min-h-[60vh] items-center justify-center overflow-hidden pt-[38px] bg-[#F4F9FF]"
     >
         {/* Signature growth-wave, watermarked across the vertical center */}
         <Image

@@ -38,7 +38,7 @@ export function SectionFrame({
     <section
       id={id}
       style={outerStyle}
-      className={`relative flex min-h-screen items-center justify-center overflow-hidden pt-[76px] ${bgClass}`}
+      className={`relative flex min-h-[60vh] items-center justify-center overflow-hidden pt-[38px] ${bgClass}`}
     >
       {/* Signature growth-wave, watermarked across the vertical center */}
       <Image

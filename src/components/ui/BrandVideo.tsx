@@ -8,23 +8,42 @@ import { useEffect, useRef } from "react";
  * is paused on its poster frame instead of autoplaying. Render inside a sized,
  * `relative` parent (or pass a sizing className); the video fills it.
  */
-/** Pause the video on its poster when the user prefers reduced motion. */
-function useReducedMotionPause(ref: React.RefObject<HTMLVideoElement | null>) {
+/**
+ * Play the video only while it's on screen and motion is allowed; pause it
+ * otherwise. This keeps at most the few visible videos decoding at once instead
+ * of every video on the page — many simultaneous looping videos can crash a tab.
+ */
+function useViewportPlayback(ref: React.RefObject<HTMLVideoElement | null>) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => {
-      if (mq.matches) {
-        el.pause();
-      } else {
+    let onScreen = false;
+
+    const sync = () => {
+      if (onScreen && !mq.matches) {
         // Autoplay can be blocked by the browser; ignore the rejection.
         el.play().catch(() => undefined);
+      } else {
+        el.pause();
       }
     };
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        sync();
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    mq.addEventListener("change", sync);
+
+    return () => {
+      io.disconnect();
+      mq.removeEventListener("change", sync);
+    };
   }, [ref]);
 }
 
@@ -38,7 +57,7 @@ export function BrandVideo({
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
-  useReducedMotionPause(ref);
+  useViewportPlayback(ref);
 
   return (
     <div className={`relative overflow-hidden bg-[#021879] ${className}`}>
@@ -49,7 +68,7 @@ export function BrandVideo({
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         poster={poster}
         aria-hidden="true"
       >
