@@ -52,21 +52,27 @@ function CaseStudyVisual() {
   return (
     <Reveal
       delay={0.2}
-      className="relative h-[300px] sm:h-[440px] lg:h-[620px] w-full group rounded-[3rem] overflow-hidden shadow-2xl"
+      className="relative w-full group rounded-[3rem] overflow-hidden shadow-2xl"
     >
-      <BrandVideo
-        src="/1114854_Woman_Job_1280x720.mp4"
-        className="w-full h-full"
-      />
-      <div className="absolute top-10 right-10 w-48 h-48 rounded-[2rem] border-4 border-white/20 glass-card overflow-hidden shadow-2xl hidden md:block animate-float">
-        <BrandImage
-          src="https://images.unsplash.com/photo-1560732488-6b0df240254a?auto=format&fit=crop&q=80&w=400"
-          sizes="192px"
+      {/* Media: sized so the 16:9 video shows its full frame on mobile (no
+          caption covering faces); taller on larger screens. */}
+      <div className="relative h-[220px] sm:h-[440px] lg:h-[620px]">
+        <BrandVideo
+          src="/1114854_Woman_Job_1280x720.mp4"
           className="w-full h-full"
         />
+        <div className="absolute top-10 right-10 w-48 h-48 rounded-[2rem] border-4 border-white/20 glass-card overflow-hidden shadow-2xl hidden md:block animate-float">
+          <BrandImage
+            src="https://images.unsplash.com/photo-1560732488-6b0df240254a?auto=format&fit=crop&q=80&w=400"
+            sizes="192px"
+            className="w-full h-full"
+          />
+        </div>
+        {/* Gradient + caption overlay on desktop only */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#021879] via-transparent to-transparent opacity-80 z-20 hidden sm:block" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#021879] via-transparent to-transparent opacity-80 z-20" />
-      <div className="absolute inset-x-0 bottom-0 z-30 bg-[#021879] px-6 py-6 sm:px-10 sm:py-8">
+      {/* Caption: stacks below the video on mobile, overlays it on desktop */}
+      <div className="relative z-30 bg-[#021879] px-6 py-6 sm:absolute sm:inset-x-0 sm:bottom-0 sm:px-10 sm:py-8">
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
           Real-time Reconciliation Engine
         </h3>
