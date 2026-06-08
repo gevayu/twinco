@@ -27,10 +27,10 @@ export function SiteNav() {
       className={`fixed w-full z-50 transition-all duration-500 ${
         isScrolled
           ? "py-4 bg-[#021879]/80 backdrop-blur-xl shadow-lg border-b border-white/10"
-          : "py-8 bg-transparent"
+          : "py-5 bg-transparent md:py-8"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center gap-3">
         <a href="#top" aria-label="Twinco home" className="shrink-0">
           <TwincoLogo className="h-6 text-[#FFDE8A] md:h-7" />
         </a>
@@ -49,10 +49,10 @@ export function SiteNav() {
 
         <a
           href="#contact"
-          className="group flex items-center gap-3 px-6 py-2.5 bg-[#0f63d6] text-white rounded-full font-bold hover:bg-[#FFDE8A] hover:text-[#021879] transition-all duration-300 shadow-md"
+          className="group flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-[#0f63d6] px-4 py-2 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[#FFDE8A] hover:text-[#021879] md:gap-3 md:px-6 md:py-2.5 md:text-base"
         >
           <span>Book a session</span>
-          <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
         </a>
       </div>
     </nav>
