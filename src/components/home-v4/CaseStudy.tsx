@@ -53,7 +53,7 @@ function CaseStudyVisual() {
       <div className="relative h-[220px] sm:h-[440px] lg:h-[620px]">
         <BrandVideo
           src="/1114854_Woman_Job_1280x720.mp4"
-          className="w-full h-full"
+          className="w-full h-full rounded-t-[3rem]"
         />
         <div className="absolute top-10 right-10 w-48 h-48 rounded-[2rem] border-4 border-white/20 glass-card overflow-hidden shadow-2xl hidden md:block animate-float">
           <BrandImage

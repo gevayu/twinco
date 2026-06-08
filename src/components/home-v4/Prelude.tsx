@@ -79,7 +79,7 @@ function ScrollHint() {
 export function Prelude() {
   return (
     <section
-      className="relative h-screen min-h-[720px] w-full overflow-hidden"
+      className="relative min-h-screen w-full overflow-hidden md:h-screen md:min-h-[720px]"
       style={{
         background: [
           "radial-gradient(140% 100% at 88% -18%, rgba(20,123,254,0.7), transparent 60%)",
@@ -93,8 +93,8 @@ export function Prelude() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#05081A]/30 to-transparent" />
 
       {/* Brand growth-wave. Tablet/desktop: centered behind the split copy.
-          Mobile: a clean floor-wave at the bottom, clear of all text. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2">
+          Mobile uses a dedicated in-flow band instead (see below). */}
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden -translate-y-1/2 md:block">
         <Image
           src="/brand/wave-hero.png"
           alt=""
@@ -110,6 +110,17 @@ export function Prelude() {
           directly under the header, with the wave as a clean floor below. */}
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col px-6 pt-24 pb-12 md:justify-between md:px-12 md:py-32">
         <PreludeTop />
+        {/* Mobile: the growth-wave gets its own dedicated band below the heading */}
+        <div className="pointer-events-none -mx-6 my-8 md:hidden">
+          <Image
+            src="/brand/wave-hero.png"
+            alt=""
+            width={1920}
+            height={1080}
+            sizes="100vw"
+            className="h-auto w-full"
+          />
+        </div>
         <PreludeBottom />
       </div>
 
