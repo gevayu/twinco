@@ -42,8 +42,8 @@ const testimonials: Testimonial[] = [
 
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <div className="rise bg-sky-gradient border border-[#E7F3FF] rounded-[2rem] p-10 md:p-16 shadow-sm">
-      <p className="text-2xl md:text-4xl text-[#021879] font-medium leading-snug mb-10">
+    <div className="rise bg-sky-gradient border border-[#E7F3FF] rounded-[2rem] p-6 sm:p-10 md:p-16 shadow-sm">
+      <p className="text-xl sm:text-2xl md:text-4xl text-[#021879] font-medium leading-snug mb-8 md:mb-10">
         &quot;{item.quote}&quot;
       </p>
       <div className="flex items-center gap-4">
@@ -52,7 +52,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
           alt=""
           width={128}
           height={128}
-          className="h-32 w-32 shrink-0 rounded-full border-4 border-white object-cover shadow-md"
+          className="h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32 shrink-0 rounded-full border-4 border-white object-cover shadow-md"
         />
         <div>
           <h3 className="font-bold text-lg text-[#021879]">{item.name}</h3>
@@ -112,7 +112,7 @@ export function SocialProof() {
         </Reveal>
 
         <Reveal delay={0.1} className="relative max-w-4xl mx-auto" {...pauseHandlers}>
-          <div className="px-4">
+          <div className="px-0 sm:px-4">
             <TestimonialCard key={current} item={testimonials[current]} />
           </div>
 
