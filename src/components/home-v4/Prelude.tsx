@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 function PreludeTop() {
   return (
-    <div className="mt-[7.5vh] max-w-4xl">
+    <div className="mt-0 max-w-4xl md:mt-[7.5vh]">
       <div
         className="rise mb-8 inline-flex items-center rounded-full border border-white/15 bg-[#021879]/70 px-4 py-2 backdrop-blur-sm"
         style={{ "--d": "0s" } as CSSProperties}
@@ -92,10 +92,9 @@ export function Prelude() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#05081A]/40 via-[#05081A]/20 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#05081A]/30 to-transparent" />
 
-      {/* Brand growth-wave, full width, on top of the scrim (not filtered).
-          Centered on desktop; dropped lower on mobile so it never cuts through
-          the stacked hero heading. */}
-      <div className="pointer-events-none absolute inset-x-0 top-[82%] -translate-y-1/2 lg:top-1/2">
+      {/* Brand growth-wave. Tablet/desktop: centered behind the split copy.
+          Mobile: a clean floor-wave at the bottom, clear of all text. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2">
         <Image
           src="/brand/wave-hero.png"
           alt=""
@@ -107,8 +106,9 @@ export function Prelude() {
         />
       </div>
 
-      {/* Copy split above and below the wave */}
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-28 md:px-12 md:py-32">
+      {/* Copy: split around the wave on tablet/desktop; on mobile stacked
+          directly under the header, with the wave as a clean floor below. */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col px-6 pt-24 pb-12 md:justify-between md:px-12 md:py-32">
         <PreludeTop />
         <PreludeBottom />
       </div>

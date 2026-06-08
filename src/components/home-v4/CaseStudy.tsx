@@ -1,5 +1,4 @@
-﻿import { ArrowRight } from "lucide-react";
-import { Reveal } from "@/components/ui/Reveal";
+﻿import { Reveal } from "@/components/ui/Reveal";
 import { BrandImage } from "@/components/ui/BrandImage";
 import { BrandVideo } from "@/components/ui/BrandVideo";
 import { SectionFrame } from "@/components/home-v4/SectionFrame";
@@ -39,11 +38,6 @@ function CaseStudyNarrative() {
           reconciles transactions in real time.
         </p>
       </div>
-
-      <button className="group mt-6 inline-flex items-center gap-3 px-8 py-4 border-2 border-[#021879] text-[#021879] rounded-full text-lg font-bold hover:bg-[#021879] hover:text-white transition-all duration-300">
-        Explore Case Studies &amp; Insights
-        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-      </button>
     </Reveal>
   );
 }
