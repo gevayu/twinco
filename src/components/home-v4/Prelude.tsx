@@ -108,7 +108,7 @@ export function Prelude() {
 
       {/* Copy: split around the wave on tablet/desktop; on mobile stacked
           directly under the header, with the wave as a clean floor below. */}
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col px-6 pt-24 pb-12 md:justify-between md:px-12 md:py-32">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col px-6 pt-24 pb-32 md:justify-between md:px-12 md:py-32">
         <PreludeTop />
         {/* Mobile: the growth-wave gets its own dedicated band below the heading */}
         <div className="pointer-events-none -mx-6 my-8 md:hidden">
