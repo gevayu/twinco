@@ -92,8 +92,10 @@ export function Prelude() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#05081A]/40 via-[#05081A]/20 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#05081A]/30 to-transparent" />
 
-      {/* Brand growth-wave, full width, on top of the scrim (not filtered) */}
-      <div className="pointer-events-none absolute inset-0 flex items-center">
+      {/* Brand growth-wave, full width, on top of the scrim (not filtered).
+          Centered on desktop; dropped lower on mobile so it never cuts through
+          the stacked hero heading. */}
+      <div className="pointer-events-none absolute inset-x-0 top-[82%] -translate-y-1/2 lg:top-1/2">
         <Image
           src="/brand/wave-hero.png"
           alt=""

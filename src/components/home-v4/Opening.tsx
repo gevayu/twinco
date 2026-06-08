@@ -6,14 +6,19 @@ import { Underline } from "@/components/brand/Underline";
 
 function OpeningVisual() {
   return (
-    <Reveal delay={0.2} className="lg:col-span-5 relative h-[500px]">
-      <div className="absolute top-0 right-0 w-4/5 h-4/5 rounded-[3rem] overflow-hidden shadow-2xl group">
+    <Reveal
+      delay={0.2}
+      className="lg:col-span-5 relative h-[260px] sm:h-[360px] lg:h-[500px]"
+    >
+      {/* Base media: full-bleed on mobile, top-right bento card on desktop */}
+      <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-2xl group lg:inset-auto lg:top-0 lg:right-0 lg:h-4/5 lg:w-4/5 lg:rounded-[3rem]">
         <BrandImage
           src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
           className="w-full h-full"
         />
       </div>
-      <div className="absolute bottom-0 left-0 w-3/5 h-3/5 rounded-[2.5rem] overflow-hidden shadow-2xl group border-8 border-[#F4F9FF] z-10 animate-float">
+      {/* Floating video accent: desktop only (overlap looks cramped on mobile) */}
+      <div className="absolute bottom-0 left-0 hidden h-3/5 w-3/5 animate-float overflow-hidden rounded-[2.5rem] border-8 border-[#F4F9FF] shadow-2xl group z-10 lg:block">
         <BrandVideo
           src="/0_Business_Meeting_1280x720.mp4"
           className="w-full h-full"

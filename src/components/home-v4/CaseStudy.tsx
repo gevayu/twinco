@@ -52,7 +52,7 @@ function CaseStudyVisual() {
   return (
     <Reveal
       delay={0.2}
-      className="relative h-[440px] lg:h-[620px] w-full group rounded-[3rem] overflow-hidden shadow-2xl"
+      className="relative h-[300px] sm:h-[440px] lg:h-[620px] w-full group rounded-[3rem] overflow-hidden shadow-2xl"
     >
       <BrandVideo
         src="/1114854_Woman_Job_1280x720.mp4"
@@ -66,7 +66,7 @@ function CaseStudyVisual() {
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-[#021879] via-transparent to-transparent opacity-80 z-20" />
-      <div className="absolute inset-x-0 bottom-0 z-30 bg-[#021879] px-10 py-8">
+      <div className="absolute inset-x-0 bottom-0 z-30 bg-[#021879] px-6 py-6 sm:px-10 sm:py-8">
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
           Real-time Reconciliation Engine
         </h3>
