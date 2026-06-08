@@ -64,11 +64,10 @@ export function BrandVideo({
       <video
         ref={ref}
         className="absolute inset-0 h-full w-full object-cover grayscale-[0.3] contrast-105 transition-transform duration-[1500ms] ease-out group-hover:scale-110"
-        autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         poster={poster}
         aria-hidden="true"
       >
